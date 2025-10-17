@@ -12,12 +12,24 @@ import { Colors } from "../../constants/colors";
 import ThemedButton from "../../components/ThemedButton";
 import ThemedTextInput from "../../components/ThemedTextInput";
 import { useState } from "react";
+import { useUser } from "../../hooks/use-user";
 
 const login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = () => {
-    console.log("Register Button Clicked", email, password);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { login } = useUser();
+  const handleSubmit = async () => {
+    setError("");
+    setLoading(true);
+    try {
+      await login(email, password);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -48,15 +60,17 @@ const login = () => {
           secureTextEntry
         />
 
-        <ThemedButton onPress={handleSubmit}>
+        <ThemedButton onPress={handleSubmit} disabled={loading}>
           <Text
             style={{
               color: "#f2f2f2",
             }}
           >
-            Login
+            {loading ? "Logging..." : "Login"}
           </Text>
         </ThemedButton>
+        <Spacer />
+        {error && <Text style={styles.error}>{error}</Text>}
 
         <Spacer height={100} />
         <Link href="/register">
@@ -97,5 +111,14 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.8,
+  },
+  error: {
+    color: Colors.warning,
+    padding: 10,
+    backgroundColor: "#f5c1c8",
+    borderColor: Colors.warning,
+    borderWidth: 1,
+    borderRadius: 6,
+    marginHorizontal: 10,
   },
 });

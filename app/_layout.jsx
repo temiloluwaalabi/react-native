@@ -2,11 +2,13 @@ import { Stack } from "expo-router";
 import { StyleSheet, useColorScheme } from "react-native";
 import { Colors } from "../constants/colors";
 import { StatusBar } from "expo-status-bar";
+import { UserProvider } from "../contexts/UserContext";
 const RootLayout = () => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme] ?? Colors.light;
+
   return (
-    <>
+    <UserProvider>
       <StatusBar value="auto" />
 
       <Stack
@@ -34,7 +36,7 @@ const RootLayout = () => {
           options={{ headerTitle: "Home" }}
         />
       </Stack>
-    </>
+    </UserProvider>
   );
 };
 
