@@ -1,8 +1,10 @@
 import {
+  ActivityIndicator,
   Keyboard,
   StyleSheet,
   Text,
   TouchableWithoutFeedback,
+  useColorScheme,
 } from "react-native";
 import ThemedView from "../../components/ThemedView";
 import ThemedText from "../../components/ThemedText";
@@ -20,6 +22,8 @@ const login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { login } = useUser();
+  const colorScheme = useColorScheme();
+  const theme = Colors[colorScheme] ?? Colors.light;
   const handleSubmit = async () => {
     setError("");
     setLoading(true);
@@ -60,7 +64,20 @@ const login = () => {
           secureTextEntry
         />
 
-        <ThemedButton onPress={handleSubmit} disabled={loading}>
+        <ThemedButton
+          onPress={handleSubmit}
+          disabled={loading}
+          style={{
+            flexDirection: "row",
+          }}
+        >
+          {loading && (
+            <ActivityIndicator
+              size="small"
+              color={theme.text}
+              style={{ marginHorizontal: 5 }}
+            />
+          )}
           <Text
             style={{
               color: "#f2f2f2",
