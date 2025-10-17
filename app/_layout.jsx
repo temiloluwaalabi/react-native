@@ -17,6 +17,14 @@ const RootLayout = () => {
         }}
       >
         <Stack.Screen
+          name="(auth)"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
+
+        <Stack.Screen
           name="index"
           // options={{
           //   headerTitle: () => (
@@ -25,14 +33,6 @@ const RootLayout = () => {
           // }}
           options={{ headerTitle: "Home" }}
         />
-        <Stack.Screen name="about" options={{ headerTitle: "About" }} />
-        <Stack.Screen name="login" options={{ headerTitle: "Sign In" }} />
-        <Stack.Screen name="register" options={{ headerTitle: "Sign Up" }} />
-        <Stack.Screen
-          name="contact"
-          options={{ headerTitle: "Contact", headerShown: false }}
-        />
-        ;
       </Stack>
     </>
   );

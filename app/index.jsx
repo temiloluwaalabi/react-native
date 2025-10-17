@@ -28,21 +28,14 @@ const Home = () => {
           gap: 10,
         }}
       >
-        <Link
-          href="/login"
-          style={{
-            borderBottomWidth: 1,
-          }}
-        >
-          <ThemedText>Login Page</ThemedText>
+        <Link href="/login" style={styles.link}>
+          <ThemedText>Login </ThemedText>
         </Link>
-        <Link
-          href="/register"
-          style={{
-            borderBottomWidth: 1,
-          }}
-        >
-          <ThemedText>Register Page</ThemedText>
+        <Link href="/register" style={styles.link}>
+          <ThemedText>Register </ThemedText>
+        </Link>
+        <Link href="/profile" style={styles.link}>
+          <ThemedText>Profile</ThemedText>
         </Link>
       </View>
     </ThemedView>
@@ -60,5 +53,9 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "400",
     fontSize: 18,
+  },
+  link: {
+    marginVertical: 10,
+    borderBottomWidth: 1,
   },
 });
